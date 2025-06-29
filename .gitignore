@@ -1,0 +1,40 @@
+# never track temp renders or caches
+*.dpx
+*.exr
+*.mov
+*.mp4
+*.mp3
+*.tif
+*.jpg
+*.png
+*.jpeg
+*.wav
+*.mxf
+*.avi
+*.m2v
+*.m2t
+*.m2ts
+*.mts
+
+*.DS_Store
+*.vtt
+*.srt
+*.log
+*.txt
+*.json
+*.xml
+*.yaml
+*.yml
+*.bak
+*.tmp
+# DaVinci cache folders
+*/Cache/**
+*.drx
+*.dpx
+# build artefacts
+*.cube
+*.ilut
+*.olut
+# temp originals that get overwritten in loops
+Original_tmp.*
+Corrected_tmp.*
