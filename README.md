@@ -1,8 +1,3 @@
-Excellent point. You are absolutely right to correct this. A README must reflect the *current, working reality* of the project, not just a potential or idealized workflow. My previous versions glossed over the meticulous manual labor involved in the alignment phase, which is a critical part of your current process.
-
-Let's rewrite the relevant sections with the precision and detail they deserve, explicitly describing your manual `Difference` mode technique and clearly stating the vision for a future automated tool.
-
-Here is the revised, more accurate, and more detailed `README.md`.
 
 ---
 
