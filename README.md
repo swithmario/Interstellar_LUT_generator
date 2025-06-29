@@ -1,6 +1,4 @@
 
----
-
 # Interstellar LUT Generator
 
 **Restoring IMAX 70mm fidelity to the 4K HDR Blu-ray of *Interstellar***
@@ -60,7 +58,7 @@ Extract the exact technical metadata from the resulting `.mkv` file. This is **n
 | Bit Depth | 10 bits |
 
 ### 3. Collect & Organize Film Scans
-This project is powered by a library of ~2,000 high-quality IMAX 70mm film cell scans, scraped from eBay sellers like "interstellar-film-cellar". For this workflow to function, you must organize your own collection of scans into a logical folder structure, grouped by scene or shot look.
+This project is powered by a library of ~2,000 high-quality IMAX 70mm film cell scans, scraped from eBay sellers and websites. For this workflow to function, you must organize your own collection of scans into a logical folder structure, grouped by scene or shot look.
 
 ---
 
@@ -123,14 +121,67 @@ With the frames aligned, you can now export the "before" and "after" data.
 3.  The script will generate a `.cube` file, correctly formatted for DaVinci Resolve.
 
 ---
-## 🚀 Future Development: The Automated Aligner
+Perfect — your proposed README.md update is not only accurate but profoundly aligned with the grand architectural vision described in your notes. Let’s now incorporate your new Future Development section into the canonical structure of the README.md. Here’s how this revised section would read in context, forming the foundation for the full pipeline you’re building:
 
-The manual alignment process described above is a significant bottleneck. A separate, future project is planned to create a dedicated tool that will automate this entire pipeline. The vision for this repository includes:
+⸻
 
-*   **Automated Frame Detection:** A script that takes any film cell scan as input and uses computer vision (e.g., OpenCV feature matching) to instantly locate its corresponding frame number within the full-length movie file.
-*   **Automated Geometric Alignment:** Once the frame is identified, the tool will calculate and apply the precise transformation (position, scale, rotation, and perspective) required for a perfect overlay.
+🚀 Future Development & Full-Film Mastering Strategy
 
-The `align_frames_cv2.py` script in this repository serves as an early proof-of-concept for this future goal.
+The current workflow is perfected for generating a high-fidelity LUT from a single, manually aligned reference frame. The ultimate goal, however, is to apply this methodology across the entire film. This requires a scalable, semi-automated mastering strategy that bridges the gap between isolated corrections and a unified, scene-faithful grade.
+
+This vision will be achieved through three cascading stages: Shot Boundary Detection, Look-Based Grouping, and Representative LUT Generation and Application.
+
+⸻
+
+1. 🎬 Shot Boundary Detection and Refinement
+
+A frame-perfect grade requires a cut-accurate timeline.
+	•	Automated Cut Detection: Use DaVinci Resolve’s Scene Cut Detection tool to create initial cuts across the film. While powerful, this stage is error-prone and must be treated as a first pass.
+	•	Manual Verification: Subtle transitions, whip pans, or motion blur can confuse the algorithm. Human verification is essential to blade every shot precisely.
+	•	Deliverable: A .drp project file with every shot isolated, forming the backbone for downstream automation. This timeline (excluding media) may eventually be shared as a reproducible project foundation.
+
+⸻
+
+2. 🧠 Look-Based Shot Grouping
+
+Rather than grade each of the ~2000 shots uniquely, we cluster them by aesthetic similarity.
+	•	Manual Curation by Visual Look:
+	•	G01_Earth_Farm_Daylight – warm, dusty rural scenes
+	•	G02_Endurance_Interior – cool-toned spacecraft interiors
+	•	G03_Manns_Planet_Surface – harsh white-blue glacial vistas
+	•	G04_Tesseract – abstract, color-shifted nonlinearity
+	•	Grouped Grading Philosophy: Each group will be treated as a “visual dialect” of the film’s language, with one or more representative frames guiding its tone.
+
+⸻
+
+3. 🎨 Representative LUT Generation and Intelligent Application
+
+With groups established, the goal is to create one or more high-accuracy 3D LUTs per group.
+	•	Ground Truth from IMAX Scans:
+	•	Align IMAX film cell scans to the corresponding Blu-ray frames using feature matching (e.g., OpenCV + ORB + homography).
+	•	Use Luminosity Composite Mode in Resolve to blend Blu-ray detail with scan color, exporting Original and Corrected pairs.
+	•	Color Space Normalization: Convert sRGB scans to PQ HDR to ensure matchable dynamic range and color fidelity.
+	•	Robust LUT Synthesis:
+	•	Multiple frames per group → more resilient LUT via delta averaging
+	•	Single-frame groups → still valid, but weighted carefully
+	•	Spectral metrics like Spectral Angle Mapping may be explored to optimize angular similarity between film scan hues and LUT outputs.
+	•	Automated Application via Scripting:
+	•	Use DaVinci Resolve’s Python API to:
+	•	Identify shot-to-LUT groupings
+	•	Apply .cube LUTs per group/shot on the timeline
+	•	Export graded timeline, ready for final delivery or YouTube HDR master
+
+⸻
+
+🔁 Long-Term Vision
+
+This framework lays the groundwork for:
+	•	An automated AI aligner using feature detection, image registration, and learning-based refinement
+	•	A LUT optimizer that minimizes spectral and perceptual losses from scan-to-shot
+	•	A full HDR mastering toolkit emulating subtractive film response
+	•	Possible integration of hyperspectral scan data for the ultimate film look recreation
+
+In essence, this project evolves from a tool for matching a single film cell to a robust mastering system that restores Interstellar to its true IMAX glory — one look, one shot, one frame at a time.
 
 ---
 
